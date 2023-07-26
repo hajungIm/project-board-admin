@@ -77,7 +77,7 @@ class ArticleManagementControllerTest {
 
     }
 
-    @DisplayName("[data][POST] 게시글 삭제 - 정상 호출")
+    @DisplayName("[view][POST] 게시글 삭제 - 정상 호출")
     @Test
     void givenArticleId_whenRequestingDeletion_thenRedirectsToArticleManagementView() throws Exception {
         // Given

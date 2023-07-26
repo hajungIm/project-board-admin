@@ -2,9 +2,7 @@ package com.springstudy.projectboardadmin.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springstudy.projectboardadmin.dto.ArticleDto;
-import org.springframework.data.domain.Page;
 
-import javax.persistence.Embedded;
 import java.util.List;
 
 public record ArticleClientResponse(
