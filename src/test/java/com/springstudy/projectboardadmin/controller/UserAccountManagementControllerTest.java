@@ -62,7 +62,7 @@ class UserAccountManagementControllerTest {
         given(userAccountManagementService.getUserAccount(userId)).willReturn(userAccountDto);
 
         // When
-        mvc.perform(get("/management/user-accounts" + userId))
+        mvc.perform(get("/management/user-accounts/" + userId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.userId").value(userId))
@@ -82,7 +82,7 @@ class UserAccountManagementControllerTest {
 
         // When
         mvc.perform(
-                        post("/management/user-accounts" + userId)
+                        post("/management/user-accounts/" + userId)
                                 .with(csrf())
                 )
                 .andExpect(status().is3xxRedirection())

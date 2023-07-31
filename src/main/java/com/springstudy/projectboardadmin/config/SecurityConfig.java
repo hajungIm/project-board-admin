@@ -46,6 +46,9 @@ public class SecurityConfig {
 
     }
 
+    /**
+     * DB 에 접근해서 인증 정보 찾아오기
+     */
     @Bean
     public UserDetailsService userDetailsService(AdminAccountService adminAccountService) {
         return username -> adminAccountService

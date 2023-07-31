@@ -120,7 +120,7 @@ class AdminAccountServiceTest {
     }
 
     private AdminAccount createSigningUpAdminAccount(String username, Set<RoleType> roleTypes) {
-        return createAdminAccount(username, roleTypes, null);
+        return createAdminAccount(username, roleTypes, username);
     }
 
     private AdminAccount createAdminAccount(String username, Set<RoleType> roleTypes, String createdBy) {
