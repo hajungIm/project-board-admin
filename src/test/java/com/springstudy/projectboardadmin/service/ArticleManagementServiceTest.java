@@ -33,7 +33,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @DisplayName("비즈니스 로직 - 게시글 관리")
 class ArticleManagementServiceTest {
 
-//    @Disabled("실제 API 호출 결과 관찰용이므로 평상시엔 비활성화")
+    @Disabled("실제 API 호출 결과 관찰용이므로 평상시엔 비활성화")
     @DisplayName("실제 API 호출 테스트")
     @SpringBootTest
     @Nested
@@ -121,7 +121,7 @@ class ArticleManagementServiceTest {
             Long articleId = 1L;
             ArticleDto expectedArticle = createArticleDto("title", "content");
             server
-                    .expect(requestTo(projectProperties.board().url() + "/api/articles" + articleId))
+                    .expect(requestTo(projectProperties.board().url() + "/api/articles/" + articleId))
                     .andRespond(withSuccess(
                             mapper.writeValueAsString(expectedArticle),
                             MediaType.APPLICATION_JSON
@@ -145,7 +145,7 @@ class ArticleManagementServiceTest {
             // Given
             Long articleId = 1L;
             server
-                    .expect(requestTo(projectProperties.board().url() + "/api/articles" + articleId))
+                    .expect(requestTo(projectProperties.board().url() + "/api/articles/" + articleId))
                     .andExpect(method(HttpMethod.DELETE))
                     .andRespond(withSuccess());
 

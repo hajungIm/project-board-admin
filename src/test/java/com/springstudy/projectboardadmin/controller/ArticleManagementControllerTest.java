@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ class ArticleManagementControllerTest {
         this.mvc = mvc;
     }
 
+    @WithMockUser(username = "tester", roles = "USER")
     @DisplayName("[view][GET] 게시글 관리 페이지 - 정상 호출")
     @Test
     void givenNothing_whenRequestingArticleManagementView_thenReturnsArticleManagementView() throws Exception {
@@ -53,6 +55,7 @@ class ArticleManagementControllerTest {
 
     }
 
+    @WithMockUser(username = "tester", roles = "USER")
     @DisplayName("[data][GET] 게시글 1개 - 정상 호출")
     @Test
     void givenArticleId_whenRequestingArticle_thenReturnsArticle() throws Exception {
@@ -62,9 +65,9 @@ class ArticleManagementControllerTest {
         given(articleManagementService.getArticle(articleId)).willReturn(articleDto);
 
         // When
-        mvc.perform(get("/management/articles" + articleId))
+        mvc.perform(get("/management/articles/" + articleId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(articleId))
                 .andExpect(jsonPath("$.title").value(articleDto.title()))
                 .andExpect(jsonPath("$.content").value(articleDto.content()))
@@ -75,6 +78,7 @@ class ArticleManagementControllerTest {
 
     }
 
+    @WithMockUser(username = "tester", roles = "MANAGER")
     @DisplayName("[view][POST] 게시글 삭제 - 정상 호출")
     @Test
     void givenArticleId_whenRequestingDeletion_thenRedirectsToArticleManagementView() throws Exception {
@@ -84,7 +88,7 @@ class ArticleManagementControllerTest {
 
         // When
         mvc.perform(
-                post("/management/articles" + articleId)
+                post("/management/articles/" + articleId)
                         .with(csrf())
                 )
                 .andExpect(status().is3xxRedirection())
