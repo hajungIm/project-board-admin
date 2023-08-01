@@ -1,5 +1,6 @@
 package com.springstudy.projectboardadmin.controller;
 
+import com.springstudy.projectboardadmin.config.GlobalControllerConfig;
 import com.springstudy.projectboardadmin.config.SecurityConfig;
 import com.springstudy.projectboardadmin.config.TestSecurityConfig;
 import com.springstudy.projectboardadmin.domain.constant.RoleType;
@@ -28,8 +29,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@DisplayName("View 컨트롤러 - 어드민 회원")
-@Import(SecurityConfig.class)
+@DisplayName("컨트롤러 - 어드민 회원")
+@Import({SecurityConfig.class, GlobalControllerConfig.class})
 @WebMvcTest(AdminAccountController.class)
 class AdminAccountControllerTest {
 
